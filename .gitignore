@@ -127,3 +127,12 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# files for training the model
+ConTextTransformer/images/
+ConTextTransformer/fastText/
+ConTextTransformer/features/
+ConTextTransformer/wordAnnot/
+ConTextTransformer/images/
+ConTextTransformer/cc.en.300.bin
+ConTextTransformer/cc.en.300.bin.gz

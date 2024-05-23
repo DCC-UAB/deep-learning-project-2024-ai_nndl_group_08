@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Download the files
+wget http://isis-data.science.uva.nl/jvgemert/images.tar.gz
+wget http://isis-data.science.uva.nl/jvgemert/features.tar.gz
+wget https://staff.fnwi.uva.nl/s.karaoglu/datasetWeb/ConText-WordAnnotation.zip
+
+# Extract the tar.gz files
+tar -xvzf images.tar.gz
+tar -xvzf features.tar.gz
+
+# Unzip the ZIP file
+unzip ConText-WordAnnotation.zip
