@@ -1,3 +1,4 @@
+# Download the files
 #!/bin/bash
 
 # Download the files
@@ -5,9 +6,13 @@ wget http://isis-data.science.uva.nl/jvgemert/images.tar.gz
 wget http://isis-data.science.uva.nl/jvgemert/features.tar.gz
 wget https://staff.fnwi.uva.nl/s.karaoglu/datasetWeb/ConText-WordAnnotation.zip
 
-# Extract the tar.gz files
-tar -xvzf images.tar.gz
-tar -xvzf features.tar.gz
+# Create directories for extraction
+mkdir -p images
+mkdir -p features
+
+# Extract the tar.gz files into the newly created directories
+tar -xvzf images.tar.gz -C images
+tar -xvzf features.tar.gz -C features
 
 # Unzip the ZIP file
-unzip ConText-WordAnnotation.zip
+unzip ConText-WordAnnotation.zip -d ConText-WordAnnotation
