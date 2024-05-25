@@ -1,0 +1,25 @@
+{
+    "textAnnotations": [
+        {
+            "nimic": 0
+        },
+        {
+            "description": "GROCFL"
+        },
+        {
+            "description": "GAS"
+        },
+        {
+            "description": "COLD"
+        },
+        {
+            "description": "Pop"
+        },
+        {
+            "description": "STATE"
+        },
+        {
+            "description": "STORE"
+        }
+    ]
+}

@@ -1,0 +1,25 @@
+{
+    "textAnnotations": [
+        {
+            "nimic": 0
+        },
+        {
+            "description": "One"
+        },
+        {
+            "description": "HOUR"
+        },
+        {
+            "description": "NO"
+        },
+        {
+            "description": "EXTRA"
+        },
+        {
+            "description": "CHARGE"
+        },
+        {
+            "description": "CLEANERS"
+        }
+    ]
+}
