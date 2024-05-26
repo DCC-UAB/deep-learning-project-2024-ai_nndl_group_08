@@ -1,0 +1,37 @@
+{
+    "textAnnotations": [
+        {
+            "nimic": 0
+        },
+        {
+            "description": "WINE"
+        },
+        {
+            "description": "URGENT"
+        },
+        {
+            "description": "NOTICE"
+        },
+        {
+            "description": "SEVERE"
+        },
+        {
+            "description": "WATER"
+        },
+        {
+            "description": "SHORTAGE"
+        },
+        {
+            "description": "DRINK"
+        },
+        {
+            "description": "MORE"
+        },
+        {
+            "description": "WINEL"
+        },
+        {
+            "description": "Ziquor"
+        }
+    ]
+}

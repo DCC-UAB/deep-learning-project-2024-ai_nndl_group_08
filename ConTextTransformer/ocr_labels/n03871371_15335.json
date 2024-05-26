@@ -1,0 +1,22 @@
+{
+    "textAnnotations": [
+        {
+            "nimic": 0
+        },
+        {
+            "description": "WINE"
+        },
+        {
+            "description": "BEER"
+        },
+        {
+            "description": "Koloveru"
+        },
+        {
+            "description": "STADIUM"
+        },
+        {
+            "description": "LIQUOR"
+        }
+    ]
+}

@@ -1,0 +1,22 @@
+{
+    "textAnnotations": [
+        {
+            "nimic": 0
+        },
+        {
+            "description": "DINER"
+        },
+        {
+            "description": "BREAKFAST"
+        },
+        {
+            "description": "LUNCH"
+        },
+        {
+            "description": "DINNER"
+        },
+        {
+            "description": "Deiver"
+        }
+    ]
+}

@@ -1,0 +1,25 @@
+{
+    "textAnnotations": [
+        {
+            "nimic": 0
+        },
+        {
+            "description": "CASH"
+        },
+        {
+            "description": "PAID FOR"
+        },
+        {
+            "description": "SCRAP"
+        },
+        {
+            "description": "GOLD"
+        },
+        {
+            "description": "SILVE"
+        },
+        {
+            "description": "G"
+        }
+    ]
+}
