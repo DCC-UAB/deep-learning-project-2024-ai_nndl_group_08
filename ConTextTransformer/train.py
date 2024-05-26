@@ -122,9 +122,9 @@ class ConTextDataset(Dataset):
 
         return image, text, text_mask, target
 
-json_file = '/datatmp/datasets/ConText/annotations/split_0.json'
-img_dir = "/datatmp/datasets/ConText/data/JPEGImages/"
-txt_dir = "/datatmp/datasets/ConText/ocr_labels/"
+json_file = './annotations/split_0.json'
+img_dir = "./images/data/JPEGImages/"
+txt_dir = "./ocr_labels/"
 input_size = 256
 data_transforms_train = torchvision.transforms.Compose([
         torchvision.transforms.RandomResizedCrop(input_size),
@@ -146,6 +146,7 @@ test_loader = torch.utils.data.DataLoader(test_set, batch_size=64, shuffle=False
 
 def train_epoch(model, optimizer, data_loader, loss_history):
     total_samples = len(data_loader.dataset)
+    losses = []
     model.train()
 
     for i, (data_img, data_txt, txt_mask, target) in enumerate(data_loader):
@@ -164,6 +165,9 @@ def train_epoch(model, optimizer, data_loader, loss_history):
                  ' (' + '{:3.0f}'.format(100 * i / len(data_loader)) + '%)]  Loss: ' +
                 '{:6.4f}'.format(loss.item()))
             loss_history.append(loss.item())
+            losses.append('{:6.4f}'.format(loss.item()))
+            
+    return losses
 
 
 def evaluate(model, data_loader, loss_history):
@@ -195,7 +199,7 @@ def evaluate(model, data_loader, loss_history):
 
     return correct_samples / total_samples
 
-N_EPOCHS = 50
+N_EPOCHS = 2
 start_time = time.time()
 
 model = ConTextTransformer(image_size=input_size, num_classes=28, channels=3, dim=256, depth=2, heads=4, mlp_dim=512)
@@ -210,12 +214,19 @@ scheduler = torch.optim.lr_scheduler.MultiStepLR(optimizer, milestones=[15,30], 
 
 train_loss_history, test_loss_history = [], []
 best_acc = 0.
+losses = []
+accs = []
 
 for epoch in range(1, N_EPOCHS + 1):
     print('Epoch:', epoch)
-    train_epoch(model, optimizer, train_loader, train_loss_history)
+    loss = train_epoch(model, optimizer, train_loader, train_loss_history)
+    losses.extend(loss)
     acc = evaluate(model, test_loader, test_loss_history)
-    if acc>best_acc: torch.save(model.state_dict(), 'all_best.pth')
+    accs.append('{:4.2f}'.format(100.0 * acc))
+    if acc>best_acc: torch.save(model.state_dict(), 'our_all_best.pth')
     scheduler.step()
+    
+print(accs)
+print(losses)
 
 print('Execution time:', '{:5.2f}'.format(time.time() - start_time), 'seconds')
