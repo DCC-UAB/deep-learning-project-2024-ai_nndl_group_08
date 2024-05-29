@@ -60,9 +60,6 @@ class ConTextTransformer(nn.Module):
         x2 = self.fasttext_feature_to_embedding(txt.float())
         x = torch.cat((x,x2), dim=1)
 
-        #tmp_mask = torch.zeros((img.shape[0], 1+self.num_cnn_features), dtype=torch.bool)
-        #mask = torch.cat((tmp_mask.to(device), mask), dim=1)
-        #x = self.transformer(x, src_key_padding_mask=mask)
         x = self.transformer(x)
 
         x = self.to_cls_token(x[:, 0])
@@ -137,7 +134,7 @@ data_transforms_test = torchvision.transforms.Compose([
     ])
 
 train_set = ConTextDataset(json_file, img_dir, txt_dir, "train", data_transforms_train)
-test_set  = ConTextDataset(json_file, img_dir, txt_dir, "test" data_transforms_test)
+test_set  = ConTextDataset(json_file, img_dir, txt_dir, "test", data_transforms_test)
 validation_set = ConTextDataset(json_file, img_dir, txt_dir, "validation", data_transforms_test)
 
 train_loader = torch.utils.data.DataLoader(train_set, batch_size=64, shuffle=True, num_workers=8)
@@ -199,7 +196,7 @@ def evaluate(model, data_loader, loss_history):
 
     return correct_samples / total_samples
 
-N_EPOCHS = 80
+N_EPOCHS = 40
 start_time = time.time()
 
 model = ConTextTransformer(image_size=input_size, num_classes=28, channels=3, dim=256, depth=3, heads=4, mlp_dim=512)
@@ -224,7 +221,7 @@ for epoch in range(1, N_EPOCHS + 1):
     acc = evaluate(model, validation_loader, test_loss_history)
     accs.append('{:4.2f}'.format(100.0 * acc))
     if acc>best_acc: 
-        torch.save(model.state_dict(), '80_our_all_best.pth')
+        torch.save(model.state_dict(), 'new_our_all_best.pth')
         best_acc = acc
     scheduler.step()
 
@@ -238,13 +235,36 @@ for epoch in range(1, 10):
 print(accs)
 print(losses)
 
+def test_saved_model(model_path, test_loader):
+    # Initialize the model
+    model = ConTextTransformer(image_size=input_size, num_classes=28, channels=3, dim=256, depth=3, heads=4, mlp_dim=512)
+    
+    # Load the model state from the saved file
+    model.load_state_dict(torch.load(model_path))
+    model.to(device)
+    
+    # Set the model to evaluation mode
+    model.eval()
+    
+    # Initialize a list to keep track of the test loss
+    test_loss_history = []
+    
+    # Evaluate the model and print the accuracy
+    accuracy = evaluate(model, test_loader, test_loss_history)
+    print(f'Test accuracy of the saved model: {accuracy:.2f}%')
+    
+    return accuracy
+
+model_path = 'new_our_all_best.pth'
+test_saved_model(model_path, test_loader)
+
 # TEST THE MODEL
 
-acc = evaluate(model, test_loader, test_loss_history)
+acc = evaluate(model_path, test_loader, test_loss_history)
 
 print("Final accuracy on test set: ", acc)
 
-acc = evaluate(model, validation_loader, test_loss_history)
+acc = evaluate(model_path, validation_loader, test_loss_history)
 
 print("Final accuracy on validation set: ", acc)
 
