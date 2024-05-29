@@ -70,17 +70,14 @@ class ConTextTransformer(nn.Module):
 
 
 class ConTextDataset(Dataset):
-    def __init__(self, json_file, root_dir, root_dir_txt, train=True, transform=None):
+    def __init__(self, json_file, root_dir, root_dir_txt, train="train", transform=None):
         with open(json_file) as f:
             data = json.load(f)
         self.train = train
         self.root_dir = root_dir
         self.root_dir_txt = root_dir_txt
         self.transform = transform
-        if (self.train):
-            self.samples = data['train']
-        else:
-            self.samples = data['test']
+        self.samples = data[train]
 
         fasttext.util.download_model('en', if_exists='ignore')  # English
         self.fasttext = fasttext.load_model('cc.en.300.bin')
@@ -139,10 +136,13 @@ data_transforms_test = torchvision.transforms.Compose([
         torchvision.transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
     ])
 
-train_set = ConTextDataset(json_file, img_dir, txt_dir, True, data_transforms_train)
-test_set  = ConTextDataset(json_file, img_dir, txt_dir, False, data_transforms_test)
+train_set = ConTextDataset(json_file, img_dir, txt_dir, "train", data_transforms_train)
+test_set  = ConTextDataset(json_file, img_dir, txt_dir, "test" data_transforms_test)
+validation_set = ConTextDataset(json_file, img_dir, txt_dir, "validation", data_transforms_test)
+
 train_loader = torch.utils.data.DataLoader(train_set, batch_size=64, shuffle=True, num_workers=8)
 test_loader = torch.utils.data.DataLoader(test_set, batch_size=64, shuffle=False, num_workers=8)
+validation_loader = torch.utils.data.DataLoader(validation_set, batch_size=64, shuffle=False, num_workers=8)
 
 def train_epoch(model, optimizer, data_loader, loss_history):
     total_samples = len(data_loader.dataset)
@@ -221,14 +221,32 @@ for epoch in range(1, N_EPOCHS + 1):
     print('Epoch:', epoch)
     loss = train_epoch(model, optimizer, train_loader, train_loss_history)
     losses.extend(loss)
-    acc = evaluate(model, test_loader, test_loss_history)
+    acc = evaluate(model, validation_loader, test_loss_history)
     accs.append('{:4.2f}'.format(100.0 * acc))
     if acc>best_acc: 
         torch.save(model.state_dict(), '80_our_all_best.pth')
         best_acc = acc
     scheduler.step()
-    
+
+for epoch in range(1, 10):
+    print('Epoch:', epoch)
+    loss = train_epoch(model, optimizer, validation_loader, train_loss_history)
+    losses.extend(loss)
+    scheduler.step()
+
+
 print(accs)
 print(losses)
+
+# TEST THE MODEL
+
+acc = evaluate(model, test_loader, test_loss_history)
+
+print("Final accuracy on test set: ", acc)
+
+acc = evaluate(model, validation_loader, test_loss_history)
+
+print("Final accuracy on validation set: ", acc)
+
 
 print('Execution time:', '{:5.2f}'.format(time.time() - start_time), 'seconds')
