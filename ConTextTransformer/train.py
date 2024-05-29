@@ -199,10 +199,10 @@ def evaluate(model, data_loader, loss_history):
 
     return correct_samples / total_samples
 
-N_EPOCHS = 2
+N_EPOCHS = 80
 start_time = time.time()
 
-model = ConTextTransformer(image_size=input_size, num_classes=28, channels=3, dim=256, depth=2, heads=4, mlp_dim=512)
+model = ConTextTransformer(image_size=input_size, num_classes=28, channels=3, dim=256, depth=3, heads=4, mlp_dim=512)
 model.to(device)
 params_to_update = []
 for name,param in model.named_parameters():
@@ -223,7 +223,9 @@ for epoch in range(1, N_EPOCHS + 1):
     losses.extend(loss)
     acc = evaluate(model, test_loader, test_loss_history)
     accs.append('{:4.2f}'.format(100.0 * acc))
-    if acc>best_acc: torch.save(model.state_dict(), 'our_all_best.pth')
+    if acc>best_acc: 
+        torch.save(model.state_dict(), '80_our_all_best.pth')
+        best_acc = acc
     scheduler.step()
     
 print(accs)

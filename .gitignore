@@ -136,3 +136,5 @@ ConTextTransformer/wordAnnot/
 ConTextTransformer/images/
 ConTextTransformer/cc.en.300.bin
 ConTextTransformer/cc.en.300.bin.gz
+ConTextTransformer/features.tar.gz
+ConTextTransformer/images.tar.gz
