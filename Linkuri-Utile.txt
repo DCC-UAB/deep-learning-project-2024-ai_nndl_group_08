@@ -1,3 +1,0 @@
-https://staff.fnwi.uva.nl/s.karaoglu/datasetWeb/Dataset.html - Paper cu toate datele
-https://github.com/dkaratzas/DL2023-24/blob/main/Problems%2010%20-%20Attention/P10_Attention_Solutions.ipynb
-https://e-aules.uab.cat/2023-24/pluginfile.php/609988/course/section/98692/Session%20-%20ProjectsIntroduction.pdf?time=1714423284114 - All projects
