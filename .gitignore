@@ -129,12 +129,12 @@ dmypy.json
 .pyre/
 
 # files for training the model
-ConTextTransformer/images/
-ConTextTransformer/fastText/
-ConTextTransformer/features/
-ConTextTransformer/wordAnnot/
-ConTextTransformer/images/
-ConTextTransformer/cc.en.300.bin
-ConTextTransformer/cc.en.300.bin.gz
-ConTextTransformer/features.tar.gz
-ConTextTransformer/images.tar.gz
+images/
+fastText/
+features/
+wordAnnot/
+images/
+cc.en.300.bin
+cc.en.300.bin.gz
+features.tar.gz
+images.tar.gz
