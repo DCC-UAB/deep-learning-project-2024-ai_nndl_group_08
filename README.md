@@ -66,7 +66,7 @@ The dataset provided for this task (that can be downloaded with the *downloadScr
 ### OCR Labels
 ./ocr_labels contains the result of the OCR pre-trained model on every image. In the ocr_labels directory, each JSON file represents the result obtained by the OCR on that specific image. There are plenty of images that do not contain any text within them, therefore you will see empty files here and there.
 
-Using the OCR to label each image is a prolonged task, so it was decided to directly upload the resulting OCR labels obtained. However, if you wish to test the approach, the functions that were used are available in the OCR_labeling.py file. 
+Using the OCR to label each image is a prolonged task, so it was decided to directly upload the resulting OCR labels obtained.
 
 ## Code structure
 ### ConTextTransformer
