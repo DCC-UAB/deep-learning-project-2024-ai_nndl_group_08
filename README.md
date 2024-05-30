@@ -58,13 +58,13 @@ The notebook also provides the possibility to evaluate the model on the test set
 The dataset provided for this task (that can be downloaded with the *downloadScript*) is structured in the following way:
 
 ### Images
-./ConTextTransformer/data/images/JPEGImages includes the 24.255 images provided. They have been split in 66% for training, 17% for validation and 17% for testing.
+/data/images/JPEGImages includes the 24.255 images provided. They have been split in 66% for training, 17% for validation and 17% for testing.
 
 ### Image names + Target Class
-./ConTextTransformer/annotations/split_0.json represents the split of the images in the 3 categories from above. The validation and test set were split so that each one of them contains the same number of instances of each of the 28 classes.
+/annotations/split_0.json represents the split of the images in the 3 categories from above. The validation and test set were split so that each one of them contains the same number of instances of each of the 28 classes.
 
 ### OCR Labels
-./ConTextTransformer/ocr_labels contains the result of the OCR pre-trained model on every image. In the ocr_labels directory, each JSON file represents the result obtained by the OCR on that specific image. There are plenty of images that do not contain any text within them, therefore you will see empty files here and there.
+/ocr_labels contains the result of the OCR pre-trained model on every image. In the ocr_labels directory, each JSON file represents the result obtained by the OCR on that specific image. There are plenty of images that do not contain any text within them, therefore you will see empty files here and there.
 
 Using the OCR to label each image is a prolonged task, so it was decided to directly upload the resulting OCR labels obtained. However, if you wish to test the approach, the functions that were used are available in the OCR_labeling.py file. 
 
