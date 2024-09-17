@@ -10,7 +10,7 @@ In the ConTextTransformer we first use three pre-trained models for feature extr
 
 ## Dependencies
 
-Ensure you have the following libraries installed:
+Ensure you have the following libraries installed: 
 
 1. **PyTorch**: For building and training neural networks.
 2. **TorchVision**: For image transformations and pre-trained models.
