@@ -87,7 +87,6 @@ One epoch of training usually takes between 40-60 seconds, therefore this script
 Imports the trained model resulting from the main_train.py script and evaluates its performance on the test_set. 
 
 
-
 ## Contributors
 Balagiu Darian : 1719581@uab.cat  
 Micu-Hontan Valentin : 1718971@uab.cat  
